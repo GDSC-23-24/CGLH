@@ -41,6 +41,6 @@ public class UserService {
 
     public Boolean validateLoginId(String loginId) {
         Optional<Member> userEntity = userRepository.findByLoginId(loginId);
-        return userEntity.isPresent() ? false : true;
+        return userEntity.isPresent() ? true : false;
     }
 }

@@ -28,10 +28,15 @@ public class WasteDto {
 
         this.id = entity.getId();
         this.state = entity.getState();
-        this.count_center = entity.getCounty_center();
+        this.count_center = entity.getCenterName();
         this.status = entity.getStatus();
         this.requestDate = entity.getRequestDate();
 
     }
+
+    public static WasteDto from(Waste entity) {
+        return new WasteDto(entity);
+    }
+
 
 }

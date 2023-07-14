@@ -1,6 +1,7 @@
 package com.gdsc.CGLH.controller;
 
-import com.gdsc.CGLH.controller.request.UserLoginDto;
+import com.gdsc.CGLH.config.JwtUtil;
+import com.gdsc.CGLH.dto.request.UserLoginDto;
 import com.gdsc.CGLH.dto.UserDto;
 import com.gdsc.CGLH.dto.UserJoinFormDto;
 import com.gdsc.CGLH.service.UserService;
@@ -25,7 +26,7 @@ public class UserController {
 
 
     /**
-     * 회원가입
+     * 회원가입 (테스트 완료)
      */
     @PostMapping("/signup")
     public ResponseEntity<?> signup(@RequestBody UserJoinFormDto user) {
@@ -35,15 +36,17 @@ public class UserController {
     }
 
     /**
-     * 로그인
+     * 로그인 (테스트 완료)
      */
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody UserLoginDto userLoginDto, HttpSession session) {
+    public ResponseEntity<?> login(@RequestBody UserLoginDto userLoginDto) {
 
         UserDto loginUser = userService.login(userLoginDto.getLoginId(), userLoginDto.getPassword());
-        session.setAttribute("user", loginUser);
+        String jwt = JwtUtil.generateToken(loginUser.getLoginId());
+
+
         log.info("데이터 확인: " + loginUser.getLoginId());
-        return ResponseEntity.ok("로그인");
+        return ResponseEntity.ok(jwt);
     }
 
 
@@ -59,12 +62,12 @@ public class UserController {
 
 
     /**
-     * 아이디 중복확인
+     * 아이디 중복확인 (테스트 완료)
      */
     @PostMapping("validate-id")
     public ResponseEntity<?> validationId(@RequestBody UserLoginDto user) {
         Boolean isValid = userService.validateLoginId(user.getLoginId());
-        if (!isValid) return ResponseEntity.badRequest().build();
+        if (!isValid) return ResponseEntity.badRequest().body("중복된 아이디가 존재합니다.");
         return ResponseEntity.ok(true);
     }
 
