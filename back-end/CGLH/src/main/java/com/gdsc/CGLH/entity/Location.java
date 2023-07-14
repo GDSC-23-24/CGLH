@@ -16,8 +16,8 @@ public class Location {
     @GeneratedValue
     @Column(name = "location_id")
     private Long id;
-    private String state; // 시/도
-    private String centerName; // 센터
+    private String state;
+    private String centerName;
     private String address;
     private String zip;
     private String phone;
