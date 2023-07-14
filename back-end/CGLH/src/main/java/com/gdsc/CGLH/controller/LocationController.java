@@ -24,6 +24,10 @@ import java.util.stream.Collectors;
 public class LocationController {
     private final LocationService locationService;
 
+    /**
+     * 스케줄링, find
+     */
+
     @GetMapping
     public List<LocationDto> findAll() {
         List<Location> locations = locationService.findAll();
@@ -80,7 +84,7 @@ public class LocationController {
             locationService.save(location);
             totalCount++;
         }
-//        System.out.println(totalCount);
+        System.out.println(totalCount);
         return ResponseEntity.status(HttpStatus.CREATED).body("추가 완료");
     }
 
@@ -92,7 +96,7 @@ public class LocationController {
         private String name, address, zip, phone, state;
         public LocationDto(Location location) {
             state = location.getState();
-            name = location.getName();
+            name = location.getCenterName();
             address = location.getAddress();
             zip = location.getZip();
             phone = location.getPhone();

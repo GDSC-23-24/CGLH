@@ -1,6 +1,5 @@
 package com.gdsc.CGLH.repository;
 
-
 import com.gdsc.CGLH.entity.Location;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;

@@ -1,16 +1,13 @@
-package com.gdsc.CGLH.dto;
-
+package com.gdsc.CGLH.dto.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserJoinFormDto {
+public class UserLoginDto {
     private String loginId;
     private String password;
-    private String nickname; //닉네임
 }

@@ -8,14 +8,16 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
-@Getter @Setter
+@Getter
+@Setter
 @Entity
 public class Location {
-    @Id @GeneratedValue
+    @Id
+    @GeneratedValue
     @Column(name = "location_id")
     private Long id;
     private String state;
-    private String name;
+    private String centerName;
     private String address;
     private String zip;
     private String phone;
@@ -25,7 +27,7 @@ public class Location {
         Location location = new Location();
         String[] temp = name.split(" ",2);
         location.state = temp[0];
-        location.name = temp[1];
+        location.centerName = temp[1];
         location.address = address;
         location.zip = zip;
         location.phone = phone;
