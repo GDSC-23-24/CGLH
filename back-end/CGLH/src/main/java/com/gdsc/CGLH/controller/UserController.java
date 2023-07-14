@@ -4,6 +4,7 @@ import com.gdsc.CGLH.config.JwtUtil;
 import com.gdsc.CGLH.dto.request.UserLoginDto;
 import com.gdsc.CGLH.dto.UserDto;
 import com.gdsc.CGLH.dto.UserJoinFormDto;
+import com.gdsc.CGLH.service.JwtTokenBlacklistService;
 import com.gdsc.CGLH.service.UserService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -14,7 +15,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+
+import static com.gdsc.CGLH.config.JwtUtil.extractloginId;
 
 @Slf4j
 @RestController
@@ -23,6 +27,7 @@ import javax.servlet.http.HttpSession;
 @ComponentScan
 public class UserController {
     private final UserService userService;
+    private final JwtTokenBlacklistService jwtTokenBlacklistService;
 
 
     /**
@@ -55,8 +60,11 @@ public class UserController {
      * 로그아웃
      */
     @PostMapping("/logout")
-    public ResponseEntity<?> logout(HttpSession session) {
-        session.invalidate();
+    public ResponseEntity<?> logout(HttpServletRequest request) {
+        String token = request.getHeader("Authorization").substring(7); // "Bearer " 제거
+        if ( token != null)
+            jwtTokenBlacklistService.addTokenToBlacklist(token);
+
         return ResponseEntity.ok("로그아웃");
     }
 
