@@ -96,7 +96,7 @@ public class LocationController {
         private String name, address, zip, phone, state;
         public LocationDto(Location location) {
             state = location.getState();
-            name = location.getName();
+            name = location.getCenterName();
             address = location.getAddress();
             zip = location.getZip();
             phone = location.getPhone();
