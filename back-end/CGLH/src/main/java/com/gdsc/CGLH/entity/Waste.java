@@ -20,7 +20,7 @@ public class Waste extends BaseEntity {
 
     private String state; //    시/도
 
-    private String county_center; //   군/구
+    private String centerName; //   군/구
 
     private WasteStatus status;
 
