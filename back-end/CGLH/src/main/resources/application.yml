@@ -1,12 +1,29 @@
+my:
+  auth:
+    key1: Krs6ISTonkcqG6OlMztbDPTKLGN%2B666qfnEeYkXMzX%2BqGUyvILTA9IM1BNgD%2F%2BTRXpzlCFIkWGKrKFPo2qwtQQ%3D%3D
+    key2: Krs6ISTonkcqG6OlMztbDPTKLGN+666qfnEeYkXMzX+qGUyvILTA9IM1BNgD/+TRXpzlCFIkWGKrKFPo2qwtQQ==
+
 spring:
-  main:
-    allow-circular-references: true
   datasource:
-    url: jdbc:h2:tcp://localhost/~/gdsc
+    url: jdbc:h2:tcp://localhost/~/hackathon2023/hack
     username: sa
     password:
-    driver-class-name: org.h2.Driver
+      driver-class-name: org.h2.Driver
 
   jpa:
     hibernate:
-      ddl-auto: create #?? ??? Create?? ??? ?. (??: ?? ??? ???? ???.)
+      ddl-auto: create # table 자동 생성
+    #      ddl-auto: none # db 초기화 없앰
+    properties:
+      hibernate:
+        #        show_sql: true
+        format_sql: true
+
+server:
+  servlet:
+    session:
+      timeout: 30m # session timeout 30min
+
+logging.level:
+  org.hibernate.SQL: debug
+  org.hibernate.type: trace
