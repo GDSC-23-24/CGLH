@@ -1,17 +1,13 @@
 package com.gdsc.CGLH.controller;
 
+import com.gdsc.CGLH.controller.request.UserLoginDto;
 import com.gdsc.CGLH.dto.UserDto;
 import com.gdsc.CGLH.dto.UserJoinFormDto;
-import com.gdsc.CGLH.dto.role.Role;
 import com.gdsc.CGLH.service.UserService;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -87,13 +83,8 @@ public class UserController {
  */
 
 
-@Getter
-@AllArgsConstructor
-@NoArgsConstructor
-private class UserLoginDto {
-    private String loginId;
-    private String password;
-}
+
 
 
 }
+
