@@ -7,8 +7,10 @@ import com.gdsc.CGLH.service.UserService;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,8 +20,9 @@ import javax.servlet.http.HttpSession;
 
 @Slf4j
 @RestController
-@RequestMapping("/api/user")
+//@RequestMapping("/api/member")
 @AllArgsConstructor
+@ComponentScan
 public class UserController {
     private final UserService userService;
 
@@ -40,7 +43,7 @@ public class UserController {
     /**
      * 로그인
      */
-    @PostMapping("/login")
+    @PostMapping("/api//login")
     public ResponseEntity<?> login(@RequestBody UserLoginDto userLoginDto, HttpSession session){
         try{
             UserDto loginUser = userService.login(userLoginDto.getLoginId(), userLoginDto.getPassword());
