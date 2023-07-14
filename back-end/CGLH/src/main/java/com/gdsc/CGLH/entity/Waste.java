@@ -22,11 +22,11 @@ public class Waste extends BaseEntity {
 
     private String county_center; //   군/구
 
-
+    private WasteStatus status;
 
     private LocalDateTime requestDate; // 신청일자
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @Column(name = "user_id")
-    private User user;
+    @JoinColumn(name = "memberId")
+    private Member member;
 }

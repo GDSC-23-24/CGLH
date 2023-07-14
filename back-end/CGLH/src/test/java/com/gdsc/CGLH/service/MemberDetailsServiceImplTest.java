@@ -2,25 +2,20 @@ package com.gdsc.CGLH.service;
 
 import com.gdsc.CGLH.dto.UserDetailsDto;
 import com.gdsc.CGLH.dto.role.Role;
-import com.gdsc.CGLH.entity.User;
 import com.gdsc.CGLH.repository.UserRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-
-import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 
 @DataJpaTest
-class UserDetailsServiceImplTest {
+class MemberDetailsServiceImplTest {
 
     @MockBean
     UserDetailsServiceImpl userDetailsService;

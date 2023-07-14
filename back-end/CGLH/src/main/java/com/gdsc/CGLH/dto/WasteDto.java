@@ -2,6 +2,7 @@ package com.gdsc.CGLH.dto;
 
 
 import com.gdsc.CGLH.entity.Waste;
+import com.gdsc.CGLH.entity.WasteStatus;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -16,9 +17,9 @@ public class WasteDto {
     private Long id;
     private String state; //    시/도
 
-    private String county; //   군/구
+    private String count_center; //   군/구
 
-    private String town; //     읍/면/동
+    private WasteStatus status; //     읍/면/동
 
     private LocalDateTime requestDate;
 
@@ -27,8 +28,8 @@ public class WasteDto {
 
         this.id = entity.getId();
         this.state = entity.getState();
-        this.county = entity.getCounty();
-        this.town = entity.getTown();
+        this.count_center = entity.getCounty_center();
+        this.status = entity.getStatus();
         this.requestDate = entity.getRequestDate();
 
     }

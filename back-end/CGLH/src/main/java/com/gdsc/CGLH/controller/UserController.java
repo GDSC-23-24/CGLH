@@ -6,6 +6,7 @@ import com.gdsc.CGLH.dto.role.Role;
 import com.gdsc.CGLH.service.UserService;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpSession;
 
+@Slf4j
 @RestController
 @RequestMapping("/api/user")
 @AllArgsConstructor
@@ -43,6 +45,7 @@ public class UserController {
         try{
             UserDto loginUser = userService.login(userLoginDto.getLoginId(), userLoginDto.getPassword());
             session.setAttribute("user", loginUser);
+            log.info("데이터 확인: " + loginUser.getLoginId());
             return ResponseEntity.ok("로그인");
         }catch (Exception e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.UNAUTHORIZED);
