@@ -1,6 +1,35 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, TextInput, Button, onClickConfirmButton } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import axios from 'axios';
+const createAxiosObject = () => {
+  //AxiosObject
+  const { CancelToken } = axios
+  const source = CancelToken.source()
+  const axiosObject = axios.create({
+      baseURL: "http://192.168.0.6:8080/",
+      headers: {
+          Accept: "application/json",
+      },
+      cancelToken: source.token,
+  })
+
+  const timeout = setTimeout(() => {
+      source.cancel(-1)
+  }, 10000)
+  axiosObject.interceptors.response.use(
+      response => {
+          clearTimeout(timeout)
+          return response
+      },
+      error => {
+          return Promise.reject(error)
+      },
+  )
+  return axiosObject
+}
+
+
 
 const User = {
   username: 'yunji0604',
@@ -46,49 +75,50 @@ export default function Login() {
     }
   };
 
+  // data 통신 확인 => GET 방식
+  useEffect(() => {
+    async function fetchMyAPI() {
+      const axiosObject = createAxiosObject()
+      await axiosObject
+          .get("api/v1/locations")
+          .then(response => {
+              console.log("성공")
+              console.log(response)
+          })
+          .catch(error => {
+              console.log(error)
+          })
+    }
+    fetchMyAPI()
+  }, [])
+  // data 통신 확인 => POST 방식 (로그인)
   const handleLoginButton = async () => {
-    if (usernameValid && passwordValid) {
-      try {      
-      const response = await fetch('http://localhost:8080/api/user/login', 
-      {        
-        method: 'POST',
-        headers: {
-                  'Content-Type': 'application/json',
-                },
-        body: JSON.stringify({
-              username: username,
-              password: password,
-              }),
-              });     
-      if (response.ok) {
-                
-               
-        alert('로그인에 성공했습니다.');
-        if (username === 'yunji0604' && password === 'test2323@@@') {
-          navigation.navigate('adminScreen');}
-             
-      else {      
-      alert('로그인에 실패했습니다. 다시 시도해주세요.');
-              }
-            } 
-              }
-           
-      catch (error) {
-              console.log('Error logging in:', error);
-              
-             
-      alert('로그인 중에 오류가 발생했습니다. 다시 시도해주세요.');
-            }
-          } else {
-            
-            alert
-      alert('입력된 정보가 올바르지 않습니다.');
-          }
-        };
+    if (usernameValid && passwordValid) {    
+
+      const data = {
+        loginId: username,
+        password: password
+      };
+
+      const axiosObject = createAxiosObject()
+      await axiosObject
+          .post("api/member/login", data)
+          .then(response => {
+              console.log("성공")
+              console.log(response)
+              navigation.navigate('adminScreen');
+          })
+          .catch(error => {
+              console.log(error)
+          })
+      }
+
+    }
       
   
   const handleLoginPress = () => {
-    onClickConfirmButton();
+    // onClickConfirmButton();
+    handleLoginButton();
   };
 
   return (
