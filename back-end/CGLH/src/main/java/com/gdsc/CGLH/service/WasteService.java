@@ -1,7 +1,8 @@
 package com.gdsc.CGLH.service;
 
-import com.gdsc.CGLH.controller.request.RequestWaste;
+import com.gdsc.CGLH.dto.request.RequestWaste;
 import com.gdsc.CGLH.dto.WasteDto;
+import com.gdsc.CGLH.dto.response.WasteScheduleDto;
 import com.gdsc.CGLH.entity.Member;
 import com.gdsc.CGLH.entity.Waste;
 import com.gdsc.CGLH.entity.WasteStatus;
@@ -13,6 +14,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityNotFoundException;
 import java.io.IOException;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -32,7 +36,7 @@ public class WasteService {
 
         Waste waste = Waste.builder()
                 .state(requestWaste.getState())
-                .county_center(requestWaste.getCounty_center())
+                .centerName(requestWaste.getCenterName())
                 .status(WasteStatus.WAITING)
                 .requestDate(requestWaste.getRequestDate())
                 .member(member)
@@ -44,6 +48,14 @@ public class WasteService {
     /**
      *  신청 내용 전체 조회 (List)
      */
+    public List<WasteDto> getWasteList(String loginId){
+        Optional<Member> member = userRepository.findByLoginId(loginId);
+
+        List<WasteDto> wasteDtoList =
+                wasteRepository.findAllByMemberId(member.get().getId()).stream().map(WasteDto::from).collect(Collectors.toList());
+
+        return wasteDtoList;
+    }
 
 
     /**
@@ -74,4 +86,10 @@ public class WasteService {
         return waste.getMember().getLoginId();
     }
 
+    public List<WasteScheduleDto> getCenterWastes(String centerName) {
+        List<WasteScheduleDto> wasteScheduleDtoList =
+                wasteRepository.findByCenterName(centerName).stream().map(WasteScheduleDto::from).collect(Collectors.toList());
+
+        return wasteScheduleDtoList;
+    }
 }
