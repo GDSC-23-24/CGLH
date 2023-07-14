@@ -17,7 +17,7 @@ public class WasteDto {
     private Long id;
     private String state; //    시/도
 
-    private String count_center; //   군/구
+    private String centerName; //   군/구
 
     private WasteStatus status; //     읍/면/동
 
@@ -28,7 +28,7 @@ public class WasteDto {
 
         this.id = entity.getId();
         this.state = entity.getState();
-        this.count_center = entity.getCounty_center();
+        this.centerName = entity.getCenterName();
         this.status = entity.getStatus();
         this.requestDate = entity.getRequestDate();
 

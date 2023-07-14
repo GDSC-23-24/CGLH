@@ -32,7 +32,7 @@ public class WasteService {
 
         Waste waste = Waste.builder()
                 .state(requestWaste.getState())
-                .county_center(requestWaste.getCounty_center())
+                .centerName(requestWaste.getCounty_center())
                 .status(WasteStatus.WAITING)
                 .requestDate(requestWaste.getRequestDate())
                 .member(member)
