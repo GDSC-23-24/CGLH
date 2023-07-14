@@ -18,6 +18,6 @@ public class RequestWaste {
     private String county; //   군/구
     @NotNull
     private String town; //     읍/면/동
-    @NotBlank
+//    @NotBlank
     private LocalDateTime requestDate;
 }

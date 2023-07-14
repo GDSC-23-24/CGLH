@@ -12,7 +12,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class WasteDto {
+    public class WasteDto {
     private Long id;
     private String state; //    시/도
 
@@ -27,8 +27,6 @@ public class WasteDto {
 
         this.id = entity.getId();
         this.state = entity.getState();
-        this.county = entity.getCounty();
-        this.town = entity.getTown();
         this.requestDate = entity.getRequestDate();
 
     }

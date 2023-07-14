@@ -32,8 +32,16 @@ public class CustomAuthFaliureHandler extends SimpleUrlAuthenticationFailureHand
         } else {
             errorMessage = "알 수 없는 이유로 로그인에 실패하였습니다 관리자에게 문의하세요.";
         }
-        errorMessage = URLEncoder.encode(errorMessage, "UTF-8"); //한글 안 됨 //인코딩 처리
-        setDefaultFailureUrl("/login?error=true&exception="+errorMessage);
-        super.onAuthenticationFailure(request,response,exception);
+        // 회원가입 페이지를 제외하고 리다이렉션 처리
+//        if (request.getRequestURI().equals("/api/user/locations")) {
+//            response.sendRedirect("/api/user/locations?error=true&exception=" + errorMessage);
+//        } else {
+//            errorMessage = URLEncoder.encode(errorMessage, "UTF-8"); //한글 안 됨 //인코딩 처리
+//            setDefaultFailureUrl("/login?error=true&exception=" + errorMessage);
+//            super.onAuthenticationFailure(request,response,exception);
+//        }
+//        errorMessage = URLEncoder.encode(errorMessage, "UTF-8"); //한글 안 됨 //인코딩 처리
+//        setDefaultFailureUrl("/login?error=true&exception="+errorMessage);
+//        super.onAuthenticationFailure(request,response,exception);
     }
 }

@@ -32,8 +32,6 @@ public class WasteService {
 
         Waste waste = Waste.builder()
                 .state(requestWaste.getState())
-                .county(requestWaste.getCounty())
-                .town(requestWaste.getTown())
                 .requestDate(requestWaste.getRequestDate())
                 .user(user)
                 .build();
