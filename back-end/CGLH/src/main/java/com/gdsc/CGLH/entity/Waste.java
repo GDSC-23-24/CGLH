@@ -22,6 +22,7 @@ public class Waste extends BaseEntity {
 
     private String centerName; //   군/구
 
+    @Enumerated(value = EnumType.STRING)
     private WasteStatus status;
 
     private LocalDateTime requestDate; // 신청일자

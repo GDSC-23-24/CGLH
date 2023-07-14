@@ -17,20 +17,14 @@ public class WasteScheduleDto {
     private Long id;
     private String centerName;
     private LocalDateTime requestDate;
-    private String status;
+    private WasteStatus status;
     private String nickname;
 
     public WasteScheduleDto(Waste entity) {
         this.id = entity.getId();
         this.centerName = entity.getCenterName();
         this.requestDate = entity.getRequestDate();
-
-        WasteStatus wasteStatus = entity.getStatus();
-
-        if (wasteStatus == WasteStatus.PERMIT) this.status = "승인";
-        else if (wasteStatus == WasteStatus.WAITING) this.status = "대기";
-        else this.status = "거절";
-
+        this.status = entity.getStatus();
         this.nickname = entity.getMember().getNickname();
     }
 
