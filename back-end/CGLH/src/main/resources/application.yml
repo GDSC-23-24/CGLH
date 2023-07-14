@@ -9,10 +9,6 @@ spring:
     username: sa
     password:
       driver-class-name: org.h2.Driver
-  mvc:
-    view:
-      prefix:
-      suffix: .html
 
   jpa:
     hibernate:
@@ -20,6 +16,8 @@ spring:
     #      ddl-auto: none # db 초기화 없앰
     properties:
       hibernate:
+        id:
+          new_generator_mappings: true
         #        show_sql: true
         format_sql: true
     defer-datasource-initialization: true
