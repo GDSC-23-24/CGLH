@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, StyleSheet, Button, Image } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import img from './main.png';
-
+import MyScreen from './MyScreen';
 
 export default function Welcome() {
   const navigation = useNavigation();
@@ -14,6 +14,10 @@ export default function Welcome() {
   const handleSignUpPress = () => {
     navigation.navigate('Sign up');
   };
+
+  const MainTabScreenPress = () => {
+    navigation.navigate('MainTab')
+  }
 
   return (
     <View style={styles.container}>
@@ -27,6 +31,9 @@ export default function Welcome() {
         </View>
         <View style={styles.button}>
           <Button title="Sign Up" onPress={handleSignUpPress} color="#4B8A08" />
+        </View>
+        <View style={styles.button}>
+          <Button title="Main" onPress={MainTabScreenPress} color="#4B8A08" />
         </View>
       </View>
     </View>

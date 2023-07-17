@@ -30,11 +30,11 @@ String.prototype.string = function(len){var s = '', i = 0; while (i++ < len) { s
 String.prototype.zf = function(len){return "0".string(len - this.length) + this;};
 Number.prototype.zf = function(len){return this.toString().zf(len);};
 
-function DateScreen() {
+function DateScreen({onDateChange, selectedDate}) {
     const placeholder = "날짜를 입력해주세요";
 
     const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
-    const [text, onChangeText] = useState("");
+    // const [text, onChangeText] = useState("");
     
     const showDatePicker = () => {
         setDatePickerVisibility(true);
@@ -46,7 +46,7 @@ function DateScreen() {
     
     const handleConfirm = (date) => {
         hideDatePicker();
-        onChangeText(date.format("yyyy/MM/dd"))
+        onDateChange(date)
     };
 
     return (
@@ -60,7 +60,7 @@ function DateScreen() {
                     placeholderTextColor='#000000'
                     underlineColorAndroid="transparent"
                     editable={false}
-                    value={text}
+                    value={selectedDate === null ? null : selectedDate.format("yyyy/MM/dd")}
                 />
                 <DateTimePickerModal
                     headerTextIOS={placeholder}

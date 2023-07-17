@@ -7,7 +7,7 @@ const Splash = ({ navigation }) => {
   useEffect(() => {
     const initializeApp = async () => {
       // 4초동안 스플래시 화면(좀있어보이게..ㅋ)
-      await new Promise(resolve => setTimeout(resolve, 4000));
+      await new Promise(resolve => setTimeout(resolve, 2000));
 
       // 앱 로드가 완료되고 표시할 준비가 되면 스플래시 화면을 숨기기 위해
       SplashScreen.hide();

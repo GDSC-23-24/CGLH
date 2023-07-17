@@ -1,50 +1,86 @@
-import React, { useState } from 'react';
-import { View, StyleSheet, Text, FlatList } from 'react-native';
-import ApplicationScreen from './ApplicationScreen';
+import React, { useEffect, useState } from 'react';
+import { View, StyleSheet, Text, ScrollView, Button } from 'react-native';
+import { createAxiosObject } from './API_BASE';
+
 
 function MyScreen() {
-    const [serverResponses, setServerResponses] = useState([]);
+    const [applicationData, setApplicationData] = useState([]);
 
-    const handleMyScreenResponse = (response) => {
-        setServerResponses(prevResponses => [...prevResponses, response]);
-    };
+    useEffect(() => {
+        fetchApplicationDetails();
+     }, []);
+
+  const fetchApplicationDetails = async () => {
+    try {
+      const axiosObject = createAxiosObject();
+      const response = await axiosObject.get('/api/waste/list'); // Replace with the actual center name
+        setApplicationData(response.data);
+    } catch (error) {
+      console.log('Error fetching application details:', error);
+    }
+  };
+
+  const DeleteApplication = async (id) => {
+    try {
+        // const data = {
+        //   wasteId: id,
+        // };
+  
+        const axiosObject = createAxiosObject();
+        const url = "/api/waste/" + id;
+        await axiosObject.delete(url);
+        fetchApplicationDetails();
+        console.log('Application DELECT');
+        // Add logic to handle the success response, if needed
+      } catch (error) {
+        console.log('Error rejecting application:', error);
+        // Add logic to handle the error, if needed
+      }
+  };
 
   return (
-    <View style={styles.container}>
-        <ApplicationScreen onMyScreenResponse={handleMyScreenResponse} />
-
-        <View style={styles.tableContainer}>
-            <Text style={styles.tableHeader}>-------신청 내역-------</Text>
-            <FlatList
-            data={serverResponses}
-            renderItem={({ item }) => (
-                <Text>{item.message}</Text>
-            )}
-            keyExtractor={(item, index) => index.toString()}
-            />
-        </View>
-    </View>
+    <ScrollView style={styles.container}>
+      {applicationData.map((application) => {
+        return(
+            <View key={application.id} style={styles.applicationContainer}>
+                <Text style={styles.label}>No: {application.id}</Text>
+                <Text style={styles.label}>닉네임: {application.nickname}</Text>
+                <Text style={styles.label}>지역명: {application.centerName}</Text>
+                <Text style={styles.label}>센터명: {application.centerName}</Text>
+                <Text style={styles.label}>신청일자: {application.requestDate}</Text>
+                <Text style={styles.label}>상태: {application.status}</Text>
+                <View style={styles.buttonContainer}>
+                    <Button
+                        title="신청 취소"
+                        onPress={() =>DeleteApplication(application.id)}
+                        color="#4B8A08"
+                    />
+                </View>
+            </View>
+        )
+        })}
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+    },
+    applicationContainer: {
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: 'white',
+        paddingVertical: 20,
     },
-    tableContainer: {
-        marginTop: 20,
-        borderWidth: 1,
-        borderColor: 'black',
-        borderRadius: 5,
-        padding: 10,
-    },
-    tableHeader: {
-        fontWeight: 'bold',
+    label: {
         marginBottom: 10,
     },
+    buttonContainer: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        width: '30%',
+    },
+    
 });
 
 export default MyScreen;

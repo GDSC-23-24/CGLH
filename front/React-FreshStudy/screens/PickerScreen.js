@@ -4,18 +4,18 @@ import { Picker } from '@react-native-picker/picker';
 
 const cities = ['부산광역시', '서울특별시', '대구광역시'];
 const districts = {
-  '부산광역시': ['중구', '서구', '동구'],
+  '부산광역시': ['중구', '서구', '동구', "강서구"],
   '서울특별시': ['강남구', '강서구', '서초구'],
   '대구광역시': ['중구', '동구', '남구']
 };
 
-function PickerScreen () {
-  const [selectedCity, setSelectedCity] = useState(null);
-  const [selectedDistrict, setSelectedDistrict] = useState(null);
+function PickerScreen ({onCityChange, onDistrictChange, selectedCity, selectedDistrict}) {
+  // const [selectedCity, setSelectedCity] = useState(null);
+  // const [selectedDistrict, setSelectedDistrict] = useState(null);
 
   const handleCityChange = (city) => {
-    setSelectedCity(city);
-    setSelectedDistrict(null); // Reset district when city changes
+    onCityChange(city);
+    onDistrictChange(null); // Reset district when city changes)
   };
 
   return (
@@ -32,7 +32,7 @@ function PickerScreen () {
       {selectedCity && (
         <Picker
           selectedValue={selectedDistrict}
-          onValueChange={(district) => setSelectedDistrict(district)}
+          onValueChange={(district) => onDistrictChange(district)}
         >
           {districts[selectedCity].map((district) => (
             <Picker.Item key={district} label={district} value={district} />
