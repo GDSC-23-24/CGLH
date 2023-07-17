@@ -20,13 +20,14 @@ public class Waste extends BaseEntity {
 
     private String state; //    시/도
 
-    private String county_center; //   군/구
+    private String centerName; //   군/구
 
-
+    @Enumerated(value = EnumType.STRING)
+    private WasteStatus status;
 
     private LocalDateTime requestDate; // 신청일자
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @Column(name = "user_id")
-    private User user;
+    @JoinColumn(name = "memberId")
+    private Member member;
 }
