@@ -61,7 +61,7 @@ public class UserController {
      */
     @PostMapping("/logout")
     public ResponseEntity<?> logout(HttpServletRequest request) {
-        String token = request.getHeader("Authorization").substring(7); // "Bearer " 제거
+        String token = request.getHeader("Authorization");
         if ( token != null)
             jwtTokenBlacklistService.addTokenToBlacklist(token);
 

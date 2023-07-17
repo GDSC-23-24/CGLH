@@ -9,6 +9,7 @@ import com.gdsc.CGLH.service.JwtTokenBlacklistService;
 import com.gdsc.CGLH.service.WasteService;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,7 +19,7 @@ import java.io.IOException;
 import java.util.List;
 
 import static com.gdsc.CGLH.config.JwtUtil.extractloginId;
-
+@Slf4j
 @RestController
 @RequestMapping("/api/waste")
 @AllArgsConstructor
@@ -32,7 +33,8 @@ public class WasteController {
      */
     @GetMapping("/list")
     public ResponseEntity<?> getWasteIndex(HttpServletRequest request) {
-        String token = request.getHeader("Authorization").substring(7); // "Bearer " 제거
+        log.info("테스트");
+        String token = request.getHeader("Authorization");
 
         if (blacklistService.isTokenBlacklisted(token)) {
             return ResponseEntity.badRequest().body("토큰이 만료되었습니다.");
@@ -59,7 +61,7 @@ public class WasteController {
     @PostMapping
     public ResponseEntity<?> saveWaste(HttpServletRequest request, @RequestBody RequestWaste requestWaste) throws IOException {
         // jwt 인증 로그인정보 가져오는 방법 1번
-        String token = request.getHeader("Authorization").substring(7); // "Bearer " 제거
+        String token = request.getHeader("Authorization");
 
         if (blacklistService.isTokenBlacklisted(token)) {
             return ResponseEntity.badRequest().body("토큰이 만료되었습니다.");
@@ -76,9 +78,8 @@ public class WasteController {
      * 폐기물 신청 삭제 (테스트 완료)
      */
     @DeleteMapping("/{wasteId}")
-    public ResponseEntity<?> deleteWaste(@RequestHeader(value = "Authorization") String token, @PathVariable("wasteId") Long wasteId) {
-        // jwt 인증 로그인정보 가져오는 방법 2번
-        token = token.substring(7);
+    public ResponseEntity<?> deleteWaste(HttpServletRequest request, @PathVariable("wasteId") Long wasteId) {
+        String token = request.getHeader("Authorization");
 
         if (blacklistService.isTokenBlacklisted(token)) {
             return ResponseEntity.badRequest().body("토큰이 만료되었습니다.");
@@ -113,7 +114,7 @@ public class WasteController {
      */
     @PostMapping("/update")
     public ResponseEntity<?> updateWaste(HttpServletRequest request, @RequestBody UpdateWasteDto requestWaste) {
-        String token = request.getHeader("Authorization").substring(7); // "Bearer " 제거
+        String token = request.getHeader("Authorization");
 
         if (blacklistService.isTokenBlacklisted(token)) {
             return ResponseEntity.badRequest().body("토큰이 만료되었습니다.");
