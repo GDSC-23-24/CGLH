@@ -1,35 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, TextInput, Button, onClickConfirmButton } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import axios from 'axios';
-const createAxiosObject = () => {
-  //AxiosObject
-  const { CancelToken } = axios
-  const source = CancelToken.source()
-  const axiosObject = axios.create({
-      baseURL: "http://192.168.0.6:8080/",
-      headers: {
-          Accept: "application/json",
-      },
-      cancelToken: source.token,
-  })
-
-  const timeout = setTimeout(() => {
-      source.cancel(-1)
-  }, 10000)
-  axiosObject.interceptors.response.use(
-      response => {
-          clearTimeout(timeout)
-          return response
-      },
-      error => {
-          return Promise.reject(error)
-      },
-  )
-  return axiosObject
-}
-
-
+import { createAxiosObject } from './API_BASE';
+import { tokens } from "./atom"
+import { useRecoilState } from "recoil"
 
 const User = {
   username: 'yunji0604',
@@ -45,6 +19,8 @@ export default function Login() {
   const [usernameValid, setUsernameValid] = useState(false);
   const [passwordValid, setPasswordValid] = useState(false);
   const [notAllow, setNotAllow] = useState(true);
+
+  const [token, setToken] = useRecoilState(tokens); 
 
   useEffect(() => {
     if (usernameValid && passwordValid) {
@@ -82,14 +58,28 @@ export default function Login() {
       await axiosObject
           .get("api/v1/locations")
           .then(response => {
-              console.log("성공")
-              console.log(response)
+              // console.log("성공")
+              // console.log(response)
           })
           .catch(error => {
               console.log(error)
           })
     }
-    fetchMyAPI()
+    // fetchMyAPI()
+    async function fetchMyAPI2() {
+      const axiosObject = createAxiosObject()
+      await axiosObject
+          .get("api/waste/list", {headers: {Accept: "application/json",Authorization:token},})
+          .then(response => {
+              console.log("성공")
+              console.log(response)
+          })
+          .catch(error => {
+              console.log(error)
+              // console.log(token)
+          })
+    }
+    fetchMyAPI2();
   }, [])
   // data 통신 확인 => POST 방식 (로그인)
   const handleLoginButton = async () => {
@@ -105,7 +95,7 @@ export default function Login() {
           .post("api/member/login", data)
           .then(response => {
               console.log("성공")
-              console.log(response)
+              setToken(response.data)
               navigation.navigate('adminScreen');
           })
           .catch(error => {
