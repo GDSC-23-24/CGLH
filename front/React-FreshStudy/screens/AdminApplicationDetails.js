@@ -1,11 +1,14 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, View, Text, Button, ScrollView } from 'react-native';
+import { tokens } from "./atom"
+import { useRecoilState } from "recoil"
 
 const createAxiosObject = () => {
   // AxiosObject
   const { CancelToken } = axios;
   const source = CancelToken.source();
+
   const axiosObject = axios.create({
     baseURL: 'http://222.97.132.2:8080/',
     headers: {
@@ -33,6 +36,7 @@ const createAxiosObject = () => {
 
 function AdminApplicationDetails() {
   const [applicationData, setApplicationData] = useState([]);
+  const [token, setToken] = useRecoilState(tokens); 
 
   useEffect(() => {
     fetchApplicationDetails();
@@ -41,7 +45,7 @@ function AdminApplicationDetails() {
   const fetchApplicationDetails = async () => {
     try {
       const axiosObject = createAxiosObject();
-      const response = await axiosObject.get('/api/waste/schedule/강서구 센터'); // Replace with the actual center name
+      const response = await axiosObject.get('/api/waste/schedule/강서구 센터',{headers: {Accept: "application/json",Authorization:token},}); // Replace with the actual center name
       setApplicationData(response.data);
     } catch (error) {
       console.log('Error fetching application details:', error);
@@ -57,7 +61,8 @@ function AdminApplicationDetails() {
         };
   
         const axiosObject = createAxiosObject();
-        await axiosObject.post('/api/waste/update', data);
+        await axiosObject.post('/api/waste/update', data,{headers: {Accept: "application/json",Authorization:token},});
+        fetchApplicationDetails();
         console.log('Application PERMIT');
         // Add logic to handle the success response, if needed
       } catch (error) {
@@ -75,8 +80,10 @@ function AdminApplicationDetails() {
       };
 
       const axiosObject = createAxiosObject();
-      await axiosObject.post('/api/waste/update', data);
+      await axiosObject.post('/api/waste/update', data,{headers: {Accept: "application/json",Authorization:token},});
+      fetchApplicationDetails();
       console.log('Application rejected');
+      setToken(response.data)
       // Add logic to handle the success response, if needed
     } catch (error) {
       console.log('Error rejecting application:', error);
