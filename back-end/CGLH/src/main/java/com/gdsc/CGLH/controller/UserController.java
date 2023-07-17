@@ -49,7 +49,6 @@ public class UserController {
         UserDto loginUser = userService.login(userLoginDto.getLoginId(), userLoginDto.getPassword());
         String jwt = JwtUtil.generateToken(loginUser.getLoginId());
 
-
         log.info("데이터 확인: " + loginUser.getLoginId());
         return ResponseEntity.ok(jwt);
     }
@@ -92,9 +91,6 @@ public class UserController {
  * }
  * }
  */
-
-
-
 
 
 }
