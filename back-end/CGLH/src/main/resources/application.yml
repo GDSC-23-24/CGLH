@@ -8,7 +8,10 @@ spring:
     url: jdbc:h2:tcp://localhost/~/hackathon2023/hack
     username: sa
     password:
-      driver-class-name: org.h2.Driver
+    driver-class-name: org.h2.Driver
+  h2:
+    tcpServer:
+      enable: true
 
   jpa:
     hibernate:
@@ -27,9 +30,11 @@ spring:
       mode: always
 server:
   port: 8080
+#  address: 223.39.212.163
   servlet:
     session:
       timeout: 30m # session timeout 30min
+
 
 logging.level:
   org.hibernate.SQL: debug
