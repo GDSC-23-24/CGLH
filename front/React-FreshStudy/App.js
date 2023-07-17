@@ -10,6 +10,7 @@ import SignUp from './screens/SignUp';
 import adminScreen from './screens/adminScreen';
 import MainTab from './screens/MainTab';
 import Splash from './screens/Splash';
+import { RecoilRoot } from 'recoil';
 
 const Stack = createNativeStackNavigator();
 
@@ -19,6 +20,7 @@ export default function App() {
     }, []);
 
     return (
+      <RecoilRoot>
         <NavigationContainer>
             <Stack.Navigator initialRouteName="Splash" screenOptions={{ headerShown: false }}>
                 <Stack.Screen name="Splash" component={Splash} />
@@ -29,5 +31,6 @@ export default function App() {
                 <Stack.Screen name="MainTab" component={MainTab} />
             </Stack.Navigator>
         </NavigationContainer> 
+      </RecoilRoot>
     )
 }
