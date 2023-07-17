@@ -2,8 +2,7 @@ package com.gdsc.CGLH.dto;
 
 
 import com.gdsc.CGLH.dto.role.Role;
-import com.gdsc.CGLH.entity.User;
-import lombok.AllArgsConstructor;
+import com.gdsc.CGLH.entity.Member;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,12 +16,12 @@ public class UserDto {
     private String nickname;
     private Role role;
 
-    public UserDto(User user){
-        this.id = user.getId();
-        this.loginId = user.getLoginId();
-        this.password = user.getPassword();
-        this.nickname = user.getNickname();
-        this.role = user.getRole();
+    public UserDto(Member member){
+        this.id = member.getId();
+        this.loginId = member.getLoginId();
+        this.password = member.getPassword();
+        this.nickname = member.getNickname();
+        this.role = member.getRole();
     }
 
     @Builder

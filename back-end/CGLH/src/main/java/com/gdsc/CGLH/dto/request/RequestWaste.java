@@ -1,4 +1,4 @@
-package com.gdsc.CGLH.controller.request;
+package com.gdsc.CGLH.dto.request;
 
 
 import lombok.AllArgsConstructor;
@@ -15,9 +15,8 @@ public class RequestWaste {
     @NotNull
     private String state; //    시/도
     @NotNull
-    private String county; //   군/구
+    private String centerName; //   군/구
     @NotNull
-    private String town; //     읍/면/동
     @NotBlank
     private LocalDateTime requestDate;
 }

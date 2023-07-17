@@ -1,9 +1,8 @@
 package com.gdsc.CGLH.service;
 
 import com.gdsc.CGLH.dto.UserDto;
-import com.gdsc.CGLH.dto.UserJoinFormDto;
 import com.gdsc.CGLH.dto.role.Role;
-import com.gdsc.CGLH.entity.User;
+import com.gdsc.CGLH.entity.Member;
 import com.gdsc.CGLH.repository.UserRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -21,7 +20,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-public class UserServiceTest {
+public class MemberServiceTest {
 
     @Mock
     private UserRepository userRepository;
@@ -29,30 +28,30 @@ public class UserServiceTest {
     @InjectMocks
     private UserService userService;
 
-    private User user;
+    private Member member;
     private UserDto userDto;
 
     @BeforeEach
     public void setUp() {
-        user = User.builder()
+        member = Member.builder()
                 .loginId("testLoginId")
                 .password("testPassword")
                 .nickname("testNickname")
                 .role(Role.ROLE_USER)
                 .build();
 
-        userDto = new UserDto(user);
+        userDto = new UserDto(member);
     }
 
     @DisplayName("정상로그인")
     @Test
     public void whenValidLoginIdAndPassword_thenShouldReturnUser() {
-        when(userRepository.findByLoginId(user.getLoginId())).thenReturn(Optional.of(user));
+        when(userRepository.findByLoginId(member.getLoginId())).thenReturn(Optional.of(member));
 
-        UserDto foundUserDto = userService.login(user.getLoginId(), user.getPassword());
+        UserDto foundUserDto = userService.login(member.getLoginId(), member.getPassword());
 
         assertNotNull(foundUserDto);
-        assertEquals(user.getLoginId(), foundUserDto.getLoginId());
+        assertEquals(member.getLoginId(), foundUserDto.getLoginId());
     }
 
     @DisplayName("존재하지 않는 로그인 ID")
@@ -61,17 +60,17 @@ public class UserServiceTest {
         when(userRepository.findByLoginId(anyString())).thenReturn(Optional.empty());
 
         assertThrows(UsernameNotFoundException.class, () -> {
-            userService.login("invalidLoginId", user.getPassword());
+            userService.login("invalidLoginId", member.getPassword());
         });
     }
 
     @DisplayName("잘못된 패스워드")
     @Test
     public void whenInvalidPassword_thenShouldThrowException() {
-        when(userRepository.findByLoginId(user.getLoginId())).thenReturn(Optional.of(user));
+        when(userRepository.findByLoginId(member.getLoginId())).thenReturn(Optional.of(member));
 
         assertThrows(BadCredentialsException.class, () -> {
-            userService.login(user.getLoginId(), "invalidPassword");
+            userService.login(member.getLoginId(), "invalidPassword");
         });
     }
 }
