@@ -10,6 +10,7 @@ import com.gdsc.CGLH.service.WasteService;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
+import lombok.NoArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -127,6 +128,8 @@ public class WasteController {
         return ResponseEntity.ok(true);
     }
     @Getter
+    @AllArgsConstructor
+    @NoArgsConstructor
     static class UpdateWasteDto {
         private Long wasteId;
         private String status;
