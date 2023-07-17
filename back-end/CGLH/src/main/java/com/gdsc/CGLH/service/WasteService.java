@@ -92,4 +92,14 @@ public class WasteService {
 
         return wasteScheduleDtoList;
     }
+
+    /**
+     * 폐기 신청 상태 수정(관리자 승인,거절,대기)
+     */
+    @Transactional(readOnly = true)
+    public void updateWaste(Long wasteId, String status) {
+        Waste waste = wasteRepository.findById(wasteId).orElseThrow(()-> new EntityNotFoundException("신청 내역이 존재하지 않습니다."));
+        wasteRepository.updateWaste(status, wasteId);
+        return;
+    }
 }

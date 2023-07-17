@@ -8,6 +8,7 @@ import com.gdsc.CGLH.dto.response.WasteScheduleDto;
 import com.gdsc.CGLH.service.JwtTokenBlacklistService;
 import com.gdsc.CGLH.service.WasteService;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -105,4 +106,28 @@ public class WasteController {
         return ResponseEntity.ok(wasteScheduleDtoList);
     }
 
+
+    /**
+     * 관리자 승인, 거절
+     * STATUS만 변경 -> REFUSE, WAITING, PERMIT
+     */
+    @PostMapping("/update")
+    public ResponseEntity<?> updateWaste(HttpServletRequest request, @RequestBody UpdateWasteDto requestWaste) {
+        String token = request.getHeader("Authorization").substring(7); // "Bearer " 제거
+
+        if (blacklistService.isTokenBlacklisted(token)) {
+            return ResponseEntity.badRequest().body("토큰이 만료되었습니다.");
+        }
+
+        String loginId = extractloginId(token);
+
+        wasteService.updateWaste(requestWaste.getWasteId(), requestWaste.getStatus());
+
+        return ResponseEntity.ok(true);
+    }
+    @Getter
+    static class UpdateWasteDto {
+        private Long wasteId;
+        private String status;
+    }
 }
