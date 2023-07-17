@@ -1,24 +1,27 @@
 import React, { useEffect, useState } from 'react';
 import { View, StyleSheet, Text, ScrollView, Button } from 'react-native';
 import { createAxiosObject } from './API_BASE';
+import { tokens } from "./atom"
+import { useRecoilState } from "recoil"
 
 
 function MyScreen() {
     const [applicationData, setApplicationData] = useState([]);
+    const [token, setToken] = useRecoilState(tokens); 
 
     useEffect(() => {
         fetchApplicationDetails();
      }, []);
 
-  const fetchApplicationDetails = async () => {
-    try {
-      const axiosObject = createAxiosObject();
-      const response = await axiosObject.get('/api/waste/list'); // Replace with the actual center name
-        setApplicationData(response.data);
-    } catch (error) {
-      console.log('Error fetching application details:', error);
-    }
-  };
+    const fetchApplicationDetails = async () => {
+      try {
+        const axiosObject = createAxiosObject();
+        const response = await axiosObject.get('/api/waste/list', {headers: {Accept: "application/json",Authorization:token},}); // Replace with the actual center name
+          setApplicationData(response.data);
+      } catch (error) {
+        console.log('Error fetching application details:', error);
+      }
+    };
 
   const DeleteApplication = async (id) => {
     try {
@@ -28,7 +31,7 @@ function MyScreen() {
   
         const axiosObject = createAxiosObject();
         const url = "/api/waste/" + id;
-        await axiosObject.delete(url);
+        await axiosObject.delete(url, {headers: {Accept: "application/json",Authorization:token},});
         fetchApplicationDetails();
         console.log('Application DELECT');
         // Add logic to handle the success response, if needed

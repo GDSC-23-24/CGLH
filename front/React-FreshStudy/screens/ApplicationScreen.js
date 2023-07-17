@@ -1,55 +1,60 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, StyleSheet, Button } from 'react-native';
 import PickerScreen from './PickerScreen';
 import DateScreen from './DateScreen';
+import { createAxiosObject } from './API_BASE';
+import { tokens } from "./atom"
+import { useRecoilState } from "recoil"
+import {fetchApplicationDetails} from './MyScreen'
 
 function ApplicationScreen() {
-    const [selectedCity, setSelectedCity] = useState(null);
-    const [selectedDistrict, setSelectedDistrict] = useState(null);
+    const [selectedState, setSelectedCity] = useState(null);
+    const [selectedCenterName, setSelectedDistrict] = useState(null);
     const [selectedDate, setSelectedDate] = useState(null);
-
-    const handleCityChange = (city) => {
-        setSelectedCity(city);
+    
+    const [token, setToken] = useRecoilState(tokens); 
+    
+    const handleCityChange = (state) => {
+        setSelectedCity(state);
     };
 
-    const handleDistrictChange = (district) => {
-        setSelectedDistrict(district);
+    const handleDistrictChange = (centerName) => {
+        setSelectedDistrict(centerName);
     };
 
-    const handleDateChange = (date) => {
-        setSelectedDate(date);
+    const handleDateChange = (requestDate) => {
+        setSelectedDate(requestDate);
     };
 
-    const handleSendData = () => {
-        // 선택된 값들을 서버로 전송
-        saveDataToServer(selectedCity, selectedDistrict, selectedDate).then(response => {
-        // 서버 응답 처리
-        console.log('서버 응답:', response);
-        // 서버의 응답에 따라 추가적인 동작 수행 가능
-        }).catch(error => {
-        // 에러 처리
-        console.error('서버 요청 실패:', error);
-        });
+    const handleSendData = async  () => {
+        const data = {
+            state : selectedState,
+            centerName : selectedCenterName,
+            requestDate : selectedDate,
+          };
+
+          console.log(data)
+
+          console.log(typeof(data.requestDate))
+
+          const axiosObject = createAxiosObject()
+          await axiosObject
+              .post("api/waste", data, {headers: {Accept: "application/json",Authorization:token},})
+              .then(response => {
+                  console.log("성공")
+                  console.log(response)
+              })
+              .catch(error => {
+                  console.log(error)
+              })
     };
 
-  const saveDataToServer = (city, district, date) => {
-    // 서버로 전송하는 로직을 구현하세요.
-    // 예시로 setTimeout을 사용하여 1초 후에 결과를 반환하는 가상의 비동기 함수입니다.
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-            const serverResponse = {
-            success: true,
-            message: '데이터가 서버에 전송되었습니다.',
-            };
-            resolve(serverResponse);
-        }, 1000);
-    });
-    };
+
 
     return (
         <View style={styles.block}>
-        <PickerScreen onCityChange={handleCityChange} onDistrictChange={handleDistrictChange} />
-        <DateScreen onDateChange={handleDateChange} />
+        <PickerScreen onCityChange={handleCityChange} onDistrictChange={handleDistrictChange} selectedCity = {selectedState} selectedDistrict = {selectedCenterName}/>
+        <DateScreen onDateChange={handleDateChange} selectedDate = {selectedDate} />
 
         <Button title="데이터 전송" onPress={handleSendData} />
         </View>

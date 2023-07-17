@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from 'react';
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import IntroduceScreen from "./IntroduceScreen";
 import ApplicationScreen from "./ApplicationScreen";
@@ -11,7 +11,7 @@ function MainTab() {
         <Tab.Navigator initialRouteName={ApplicationScreen}>
             <Tab.Screen name="소개공간" component={IntroduceScreen}/>
             <Tab.Screen name="파쇄 신청" component={ApplicationScreen}/>
-            <Tab.Screen name="내 정보" component={MyScreen}/>
+            <Tab.Screen name="내 정보" component={MyScreen} options={{unmountOnBlur:true}}/>
         </Tab.Navigator>
     );
 }
