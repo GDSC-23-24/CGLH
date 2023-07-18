@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { View, StyleSheet, Button } from 'react-native';
+import { useRecoilState } from "recoil"
+
 import PickerScreen from './PickerScreen';
 import DateScreen from './DateScreen';
 import { createAxiosObject } from '../toServer/API_BASE';
 import { tokens } from "../toServer/atom"
-import { useRecoilState } from "recoil"
+
 import {fetchApplicationDetails} from './MyScreen'
 
 function ApplicationScreen() {
@@ -53,10 +55,10 @@ function ApplicationScreen() {
 
     return (
         <View style={styles.block}>
-        <PickerScreen onCityChange={handleCityChange} onDistrictChange={handleDistrictChange} selectedCity = {selectedState} selectedDistrict = {selectedCenterName}/>
-        <DateScreen onDateChange={handleDateChange} selectedDate = {selectedDate} />
+            <PickerScreen onCityChange={handleCityChange} onDistrictChange={handleDistrictChange} selectedCity = {selectedState} selectedDistrict = {selectedCenterName}/>
+            <DateScreen onDateChange={handleDateChange} selectedDate = {selectedDate} />
 
-        <Button title="데이터 전송" onPress={handleSendData} />
+            <Button title="데이터 전송" onPress={handleSendData} />
         </View>
     );
 }
