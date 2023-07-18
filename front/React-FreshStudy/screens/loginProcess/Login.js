@@ -99,7 +99,7 @@ export default function Login() {
               console.log("성공")
               setToken(response.data)
               if(username == "abcde1"){
-                navigation.navigate('adminScreen');
+                navigation.navigate('AdminScreen');
               }
               else{
                 navigation.navigate("MainTab");
