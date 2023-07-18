@@ -48,7 +48,7 @@ function MyScreen() {
             <View key={application.id} style={styles.applicationContainer}>
                 <Text style={styles.label}>No: {application.id}</Text>
                 <Text style={styles.label}>닉네임: {application.nickname}</Text>
-                <Text style={styles.label}>지역명: {application.centerName}</Text>
+                <Text style={styles.label}>지역명: {application.state}</Text>
                 <Text style={styles.label}>센터명: {application.centerName}</Text>
                 <Text style={styles.label}>신청일자: {application.requestDate}</Text>
                 <Text style={styles.label}>상태: {application.status}</Text>
@@ -74,14 +74,22 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         paddingVertical: 20,
+        backgroundColor: '#F5F5F5',
+        borderRadius: 8,
+        marginVertical: 10,
+        marginHorizontal: 20,
+        backgroundColor: '#FFE4C4'
     },
     label: {
         marginBottom: 10,
+        fontSize: 16,
+        fontWeight: 'bold',
     },
     buttonContainer: {
         flexDirection: 'row',
-        justifyContent: 'space-between',
-        width: '30%',
+        justifyContent: 'center',
+        width: '60%',
+        marginTop: 10,
     },
     
 });
