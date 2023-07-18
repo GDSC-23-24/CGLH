@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react';
 import { View, Image, StyleSheet } from 'react-native';
 import SplashScreen from 'react-native-splash-screen'; 
-import splashImage from './splash.png'; 
+
+import splashImage from './imgSrc/splash.png';
 
 const Splash = ({ navigation }) => {
   useEffect(() => {

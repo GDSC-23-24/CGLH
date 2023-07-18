@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, TextInput, Button, onClickConfirmButton } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { createAxiosObject } from './API_BASE';
-import { tokens } from "./atom"
 import { useRecoilState } from "recoil"
+
+import { createAxiosObject } from '../toServer/API_BASE';
+import { tokens } from "../toServer/atom"
+import RootStack from '../RootStack';
 
 const User = {
   username: 'yunji0604',
@@ -96,15 +98,18 @@ export default function Login() {
           .then(response => {
               console.log("성공")
               setToken(response.data)
-              navigation.navigate('adminScreen');
+              if(username == "abcde1"){
+                navigation.navigate('adminScreen');
+              }
+              else{
+                navigation.navigate("MainTab");
+              }
           })
           .catch(error => {
               console.log(error)
           })
       }
-
-    }
-      
+    } 
   
   const handleLoginPress = () => {
     // onClickConfirmButton();

@@ -1,8 +1,9 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, View, Text, Button, ScrollView } from 'react-native';
-import { tokens } from "./atom"
-import { useRecoilState } from "recoil"
+
+import { tokens } from '../toServer/atom';
+import { useRecoilState } from 'recoil';
 
 const createAxiosObject = () => {
   // AxiosObject
@@ -10,7 +11,7 @@ const createAxiosObject = () => {
   const source = CancelToken.source();
 
   const axiosObject = axios.create({
-    baseURL: 'http://222.97.132.2:8080/',
+    baseURL: 'http://192.168.159.1:8080/',
     headers: {
       Accept: 'application/json',
     },

@@ -1,8 +1,9 @@
 import React from 'react';
 import { View, Text, StyleSheet, Button, Image } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import img from './main.png';
-import MyScreen from './MyScreen';
+
+import mainImg from './imgSrc/main.png'
+import MyScreen from './userSrc/MyScreen';
 
 export default function Welcome() {
   const navigation = useNavigation();
@@ -22,7 +23,7 @@ export default function Welcome() {
   return (
     <View style={styles.container}>
       
-      <Image source={img} style={styles.image} />
+      <Image source={mainImg} style={styles.image} />
       <Text style={styles.title}>책임감 있는 소비와 생산</Text>
       <Text style={styles.subtitle}>함께하시겠습니까?</Text>
       <View style={styles.buttonContainer}>
@@ -31,6 +32,9 @@ export default function Welcome() {
         </View>
         <View style={styles.button}>
           <Button title="Sign Up" onPress={handleSignUpPress} color="#4B8A08" />
+        </View>
+        <View style={styles.button}>
+          <Button title="Main" onPress={MainTabScreenPress} color="#4B8A08" />
         </View>
       </View>
     </View>

@@ -2,15 +2,16 @@ import React, { useEffect, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Calendar } from 'react-native-calendars';
 import axios from 'axios';
-import { tokens } from "./atom"
 import { useRecoilState } from "recoil"
+
+import { tokens } from "../toServer/atom"
 
 const createAxiosObject = () => {
   // AxiosObject
   const { CancelToken } = axios;
   const source = CancelToken.source();
   const axiosObject = axios.create({
-    baseURL: 'http://222.97.132.2:8080/',
+    baseURL: 'http://192.168.159.1:8080/',
     headers: {
       Accept: 'application/json',
     },

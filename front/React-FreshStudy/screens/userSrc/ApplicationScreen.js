@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { View, StyleSheet, Button } from 'react-native';
 import PickerScreen from './PickerScreen';
 import DateScreen from './DateScreen';
-import { createAxiosObject } from './API_BASE';
-import { tokens } from "./atom"
+import { createAxiosObject } from '../toServer/API_BASE';
+import { tokens } from "../toServer/atom"
 import { useRecoilState } from "recoil"
 import {fetchApplicationDetails} from './MyScreen'
 

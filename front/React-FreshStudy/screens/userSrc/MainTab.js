@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+
 import IntroduceScreen from "./IntroduceScreen";
 import ApplicationScreen from "./ApplicationScreen";
 import MyScreen from "./MyScreen";

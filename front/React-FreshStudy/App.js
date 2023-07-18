@@ -1,16 +1,15 @@
 import React, { useEffect } from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer } from '@react-navigation/native';
-import RootStack from './screens/RootStack';
 import SplashScreen from 'react-native-splash-screen';
+import { RecoilRoot } from 'recoil';
 
 import Welcome from './screens/Welcome';
-import Login from './screens/Login';
-import SignUp from './screens/SignUp';
-import adminScreen from './screens/adminScreen';
-import MainTab from './screens/MainTab';
+import Login from './screens/loginProcess/Login';
+import SignUp from './screens/loginProcess/SignUp';
+import AdminScreen from './screens/adminSrc/adminScreen';
+import MainTab from './screens/userSrc/MainTab';
 import Splash from './screens/Splash';
-import { RecoilRoot } from 'recoil';
 
 const Stack = createNativeStackNavigator();
 
@@ -27,7 +26,7 @@ export default function App() {
                 <Stack.Screen name="Welcome" component={Welcome} />
                 <Stack.Screen name="Login" component={Login} />
                 <Stack.Screen name="Sign up" component={SignUp} />
-                <Stack.Screen name="adminScreen" component={adminScreen} />
+                <Stack.Screen name="AdminScreen" component={AdminScreen} />
                 <Stack.Screen name="MainTab" component={MainTab} />
             </Stack.Navigator>
         </NavigationContainer> 

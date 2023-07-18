@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { View, StyleSheet, Text, ScrollView, Button } from 'react-native';
-import { createAxiosObject } from './API_BASE';
-import { tokens } from "./atom"
 import { useRecoilState } from "recoil"
 
+import { createAxiosObject } from '../toServer/API_BASE';
+import { tokens } from "../toServer/atom"
 
 function MyScreen() {
     const [applicationData, setApplicationData] = useState([]);
