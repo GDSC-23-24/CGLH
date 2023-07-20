@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, StyleSheet, Button } from 'react-native';
+import { View, StyleSheet, Button, SafeAreaView, Text } from 'react-native';
 import { useRecoilState } from "recoil"
 
 import PickerScreen from './PickerScreen';
@@ -54,24 +54,70 @@ function ApplicationScreen() {
 
 
     return (
-        <View style={styles.block}>
-            <PickerScreen onCityChange={handleCityChange} onDistrictChange={handleDistrictChange} selectedCity = {selectedState} selectedDistrict = {selectedCenterName}/>
-            <DateScreen onDateChange={handleDateChange} selectedDate = {selectedDate} />
-
-            <Button title="데이터 전송" onPress={handleSendData} />
-        </View>
+        <SafeAreaView style={styles.safeContainer}>
+            <Text style={styles.title}> 신청할 구역과 날짜를 선택해주세요.</Text>
+            <View style={styles.container}>
+                <View style={styles.pickerView}>
+                    <PickerScreen
+                        onCityChange={handleCityChange}
+                        onDistrictChange={handleDistrictChange}
+                        selectedCity={selectedState}
+                        selectedDistrict={selectedCenterName}
+                    />
+                </View>
+                <View style={styles.dateView}>
+                    <DateScreen
+                        onDateChange={handleDateChange}
+                        selectedDate={selectedDate}
+                    />
+                </View>
+                <View style={styles.buttonView}>
+                    <Button
+                        title="데이터 전송"
+                        onPress={handleSendData}
+                        color="#4B8A08" // Change the text color of the button
+                    />
+                </View>
+            </View>
+        </SafeAreaView>
     );
 }
 
 const styles = StyleSheet.create({
+    title: {
+        fontSize: 24,
+        fontWeight: 'bold',
+        marginTop: 20,
+        marginLeft: 10,
+        marginBottom: -20,
+      },
+    safeContainer: {
+        flex: 1,
+    },
     container: {
         flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
+        margin: '10%',
         backgroundColor: 'white',
+        paddingVertical: 20,
+        borderWidth: 2, 
+        borderColor: '#ccc',
+        borderRadius: 5,
     },
-
-    block: {},
+    pickerView: {
+        flex: 4,
+    },
+    dateView: {
+        flex: 4,
+        //backgroundColor: '#4A994E',
+    },
+    buttonView: {
+        flex: 2,
+        justifyContent: 'center', 
+        marginLeft: 50,
+        marginRight: 50,
+        borderRadius: 10, // Add border radius for a rounded look
+        
+    },
 });
 
 export default ApplicationScreen;

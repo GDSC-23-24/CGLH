@@ -1,6 +1,6 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, Image } from 'react-native';
 
 import AdminApplicationDetails from './AdminApplicationDetails';
 import AdminMy from './AdminMy';
@@ -16,9 +16,51 @@ const AdminScreen = () => {
         여기서 당신은 유저정보와 신청 내역을 확인하고 관리 할 수 있습니다.
       </Text>
       <View style={styles.tabContainer}>
-        <Tab.Navigator>
-          <Tab.Screen name="유저 정보와 신청 내역 관리" component={AdminApplicationDetails} />
-          <Tab.Screen name="관리자 정보" component={AdminMy} />
+        <Tab.Navigator
+        screenOptions={{
+          tabBarActiveTintColor: 'green', 
+          tabBarInactiveTintColor: 'black',
+        }}>
+          <Tab.Screen 
+            name="유저 정보와 신청 내역 관리" 
+            component={AdminApplicationDetails}
+            options={{
+              tabBarIcon: ({ focused }) => {
+                  return (
+                      <View style={{ alignContent: "center", justifyContent: "center" }}>
+                          <Image
+                              source={
+                                  focused
+                                  ? require("../../img/ManagementFill.png")
+                                  : require("../../img/Management.png")
+                              }
+                              style={{ width: 25, height: 25 }}
+                          />
+                      </View>
+                  )
+              },
+          }} 
+        />
+          <Tab.Screen 
+            name="관리자 정보" 
+            component={AdminMy}
+            options={{
+              tabBarIcon: ({ focused }) => {
+                  return (
+                      <View style={{ alignContent: "center", justifyContent: "center" }}>
+                          <Image
+                              source={
+                                  focused
+                                  ? require("../../img/adminInformationFill.png")
+                                  : require("../../img/adminInformation.png")
+                              }
+                              style={{ width: 25, height: 25 }}
+                          />
+                      </View>
+                  )
+              },
+          }}
+        />
         </Tab.Navigator>
       </View>
     </View>

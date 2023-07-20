@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import { View, StyleSheet, TouchableOpacity, TextInput,Picker} from 'react-native';
+import { View, StyleSheet, TouchableOpacity, TextInput,Picker, ImageBackground} from 'react-native';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 
 
@@ -50,42 +50,44 @@ function DateScreen({onDateChange, selectedDate}) {
     };
 
     return (
-        <View style={styles.block}>
-
-            <TouchableOpacity onPress={showDatePicker}>
-                <TextInput
-                    pointerEvents="none"
-                    style={styles.textInput}
-                    placeholder={placeholder}
-                    placeholderTextColor='#000000'
-                    underlineColorAndroid="transparent"
-                    editable={false}
-                    value={selectedDate === null ? null : selectedDate.format("yyyy/MM/dd")}
-                />
-                <DateTimePickerModal
-                    headerTextIOS={placeholder}
-                    isVisible={isDatePickerVisible}
-                    mode="date"
-                    onConfirm={handleConfirm}
-                    onCancel={hideDatePicker}
-                />
-            </TouchableOpacity>
-            
+        <View style={styles.container}>
+          <TouchableOpacity onPress={showDatePicker}>
+            <TextInput
+              pointerEvents="none"
+              style={styles.textInput}
+              placeholder={placeholder}
+              placeholderTextColor='white'
+              underlineColorAndroid="transparent"
+              editable={false}
+              value={selectedDate === null ? null : selectedDate.format("yyyy/MM/dd")}
+            />
+            <DateTimePickerModal
+              headerTextIOS={placeholder}
+              isVisible={isDatePickerVisible}
+              mode="date"
+              onConfirm={handleConfirm}
+              onCancel={hideDatePicker}
+            />
+          </TouchableOpacity>
         </View>
-  );
-}
-
-const styles = StyleSheet.create({ 
-    container: {
+      );
+    }
+    
+    const styles = StyleSheet.create({
+      container: {
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: 'white',
-    },
-
-   block: {
-
-   }
-})
+        //padding: 20,
+      },
+      textInput: {
+        fontSize: 20,
+        color: 'white',
+        backgroundColor: '#4B8A08',
+        borderRadius: 10, // Add border radius for a rounded look
+        paddingVertical: 12, // Adjust vertical padding for better spacing
+        paddingHorizontal: 16, // Adjust horizontal padding for better spacing
+      },
+    })
 
 export default DateScreen;

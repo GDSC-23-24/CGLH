@@ -51,7 +51,14 @@ function MyScreen() {
                 <Text style={styles.label}>지역명: {application.state}</Text>
                 <Text style={styles.label}>센터명: {application.centerName}</Text>
                 <Text style={styles.label}>신청일자: {application.requestDate}</Text>
-                <Text style={styles.label}>상태: {application.status}</Text>
+                <Text
+                  style={[
+                    styles.label,
+                    application.status === 'REFUSE' && styles.redText, 
+                    application.status === 'WAITING' && styles.yellowText,
+                    application.status === 'PERMIT' && styles.greenText,
+                  ]}>상태: {application.status}
+                </Text>
                 <View style={styles.buttonContainer}>
                     <Button
                         title="신청 취소"
@@ -74,16 +81,27 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         paddingVertical: 20,
-        backgroundColor: '#F5F5F5',
+        backgroundColor: 'white',
         borderRadius: 8,
         marginVertical: 10,
         marginHorizontal: 20,
-        backgroundColor: '#FFE4C4'
+        borderWidth: 2, 
+        borderColor: '#ccc',
+        borderRadius: 5,
     },
     label: {
         marginBottom: 10,
         fontSize: 16,
         fontWeight: 'bold',
+    },
+    redText: {
+      color: 'red', 
+    },
+    yellowText: {
+      color: '#e7ce12',
+    },
+    greenText: {
+      color: '#6aa724',
     },
     buttonContainer: {
         flexDirection: 'row',

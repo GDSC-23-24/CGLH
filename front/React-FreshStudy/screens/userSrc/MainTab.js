@@ -10,7 +10,13 @@ const Tab = createBottomTabNavigator();
 
 function MainTab() {
     return (
-        <Tab.Navigator initialRouteName={ApplicationScreen}>
+        <Tab.Navigator 
+            initialRouteName={ApplicationScreen}
+            screenOptions={{
+                tabBarActiveTintColor: 'green', 
+                tabBarInactiveTintColor: 'black',
+            }}
+        >
             <Tab.Screen 
                 name="소개공간" 
                 component={IntroduceScreen}
@@ -24,7 +30,7 @@ function MainTab() {
                                         ? require("../../img/introduceFill.png")
                                         : require("../../img/introduce.png")
                                     }
-                                    style={{ width: 30, height: 30 }}
+                                    style={{ width: 25, height: 25 }}
                                 />
                             </View>
                         )
@@ -44,7 +50,7 @@ function MainTab() {
                                         ? require("../../img/applicationFill.png")
                                         : require("../../img/application.png")
                                     }
-                                    style={{ width: 30, height: 30 }}
+                                    style={{ width: 25, height: 25 }}
                                 />
                             </View>
                         )
@@ -65,7 +71,7 @@ function MainTab() {
                                         ? require("../../img/myFill.png")
                                         : require("../../img/my.png")
                                     }
-                                    style={{ width: 30, height: 30 }}
+                                    style={{ width: 25, height: 25 }}
                                 />
                             </View>
                         )

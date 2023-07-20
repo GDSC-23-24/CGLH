@@ -112,7 +112,7 @@ function AdminApplicationDetails() {
               <Button
                 title="반려"
                 onPress={() => REFUSEApplication(application.id)}
-                color="#4B8A08"
+                color="#8b0808"
               />
             </View>
           ) : (

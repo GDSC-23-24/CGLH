@@ -8,7 +8,7 @@ import Welcome from './screens/Welcome';
 import Login from './screens/loginProcess/Login';
 import SignUp from './screens/loginProcess/SignUp';
 import AdminScreen from './screens/adminSrc/AdminScreen';
-import MainTab from './screens/userSrc/MainTab';
+
 import Splash from './screens/Splash';
 
 const Stack = createNativeStackNavigator();
@@ -27,7 +27,6 @@ export default function App() {
                 <Stack.Screen name="Login" component={Login} />
                 <Stack.Screen name="Sign up" component={SignUp} />
                 <Stack.Screen name="AdminScreen" component={AdminScreen} />
-                <Stack.Screen name="MainTab" component={MainTab} />
             </Stack.Navigator>
         </NavigationContainer> 
       </RecoilRoot>

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 
 import { createAxiosObject } from '../toServer/API_BASE';
@@ -47,10 +47,11 @@ function PickerScreen ({onCityChange, onDistrictChange, selectedCity, selectedDi
   };
 
   return (
-    <View>
+    <View style={styles.container}>
       <Picker
         selectedValue={selectedCity}
         onValueChange={handleCityChange}
+        style={{ color: "white" }}
       >
         {cities.map((city) => (
           <Picker.Item key={city} label={city} value={city} />
@@ -61,6 +62,7 @@ function PickerScreen ({onCityChange, onDistrictChange, selectedCity, selectedDi
         <Picker
           selectedValue={selectedDistrict}
           onValueChange={(district) => onDistrictChange(district)}
+          style={{ color: "white" }}
         >
           {districts[selectedCity].map((district) => (
             <Picker.Item key={district} label={district} value={district} />
@@ -70,5 +72,23 @@ function PickerScreen ({onCityChange, onDistrictChange, selectedCity, selectedDi
     </View>
   );
 };
+
+const styles = StyleSheet.create({ 
+  container: {
+      flex: 1,
+      justifyContent: 'center',
+      //alignItems: 'center',
+      backgroundColor: '#4B8A08',
+      margin: '10%',
+      padding: '10%',
+      borderRadius: 10,
+      paddingVertical: 12,
+      paddingHorizontal: 16,
+  },
+
+ block: {
+
+ }
+})
 
 export default PickerScreen;
