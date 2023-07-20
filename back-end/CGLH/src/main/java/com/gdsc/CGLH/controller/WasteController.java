@@ -16,6 +16,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 import java.io.IOException;
 import java.util.List;
 
@@ -60,7 +61,7 @@ public class WasteController {
      * 파쇄 신청 추가 (테스트 완료)
      */
     @PostMapping
-    public ResponseEntity<?> saveWaste(HttpServletRequest request, @RequestBody RequestWaste requestWaste) throws IOException {
+    public ResponseEntity<?> saveWaste(HttpServletRequest request, @RequestBody @Valid RequestWaste requestWaste) throws IOException {
         // jwt 인증 로그인정보 가져오는 방법 1번
         String token = request.getHeader("Authorization");
 
@@ -107,6 +108,7 @@ public class WasteController {
         List<WasteScheduleDto> wasteScheduleDtoList = wasteService.getCenterWastes(centerName);
         return ResponseEntity.ok(wasteScheduleDtoList);
     }
+
 
 
     /**
