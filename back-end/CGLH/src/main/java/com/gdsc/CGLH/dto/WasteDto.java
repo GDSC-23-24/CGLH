@@ -23,6 +23,8 @@ public class WasteDto {
 
     private LocalDateTime requestDate;
 
+    private String nickname;
+
 
     public WasteDto(Waste entity) {
 
@@ -31,6 +33,7 @@ public class WasteDto {
         this.centerName = entity.getCenterName();
         this.status = entity.getStatus();
         this.requestDate = entity.getRequestDate();
+        this.nickname = entity.getMember().getNickname();
 
     }
 
