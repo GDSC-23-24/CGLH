@@ -19,7 +19,9 @@ export default function Welcome() {
   const MainTabScreenPress = () => {
     navigation.navigate('MainTab')
   }
-
+  //<View style={styles.button}>
+  //<Button title="Main" onPress={MainTabScreenPress} color="#4B8A08" />
+  //</View>
   return (
     <View style={styles.container}>
       
@@ -33,9 +35,7 @@ export default function Welcome() {
         <View style={styles.button}>
           <Button title="Sign Up" onPress={handleSignUpPress} color="#4B8A08" />
         </View>
-        <View style={styles.button}>
-          <Button title="Main" onPress={MainTabScreenPress} color="#4B8A08" />
-        </View>
+        
       </View>
     </View>
   );

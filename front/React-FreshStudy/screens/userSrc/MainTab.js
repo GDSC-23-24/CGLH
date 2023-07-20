@@ -6,18 +6,18 @@ import IntroduceScreen from "./IntroduceScreen";
 import ApplicationScreen from "./ApplicationScreen";
 import MyScreen from "./MyScreen";
 
-const Tab = createBottomTabNavigator();
+const Tab2 = createBottomTabNavigator();
 
 function MainTab() {
     return (
-        <Tab.Navigator 
+        <Tab2.Navigator 
             initialRouteName={ApplicationScreen}
             screenOptions={{
                 tabBarActiveTintColor: 'green', 
                 tabBarInactiveTintColor: 'black',
             }}
         >
-            <Tab.Screen 
+            <Tab2.Screen 
                 name="소개공간" 
                 component={IntroduceScreen}
                 options={{
@@ -37,7 +37,7 @@ function MainTab() {
                     },
                 }}
             />
-            <Tab.Screen 
+            <Tab2.Screen 
                 name="파쇄 신청" 
                 component={ApplicationScreen}
                 options={{
@@ -57,7 +57,7 @@ function MainTab() {
                     },
                 }}
             />
-            <Tab.Screen 
+            <Tab2.Screen 
                 name="내 정보" 
                 component={MyScreen} 
                 options={{
@@ -78,7 +78,7 @@ function MainTab() {
                     },
                 }}
             />
-        </Tab.Navigator>
+        </Tab2.Navigator>
     );
 }
 

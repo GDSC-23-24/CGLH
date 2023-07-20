@@ -7,8 +7,6 @@ import DateScreen from './DateScreen';
 import { createAxiosObject } from '../toServer/API_BASE';
 import { tokens } from "../toServer/atom"
 
-import {fetchApplicationDetails} from './MyScreen'
-
 function ApplicationScreen() {
     const [selectedState, setSelectedCity] = useState(null);
     const [selectedCenterName, setSelectedDistrict] = useState(null);

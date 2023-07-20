@@ -46,7 +46,7 @@ function AdminApplicationDetails() {
   const fetchApplicationDetails = async () => {
     try {
       const axiosObject = createAxiosObject();
-      const response = await axiosObject.get('/api/waste/schedule/강서구 센터',{headers: {Accept: "application/json",Authorization:token},}); // Replace with the actual center name
+      const response = await axiosObject.get('/api/waste/schedule/나주시 농업기술센터',{headers: {Accept: "application/json",Authorization:token},}); // Replace with the actual center name
       setApplicationData(response.data);
     } catch (error) {
       console.log('Error fetching application details:', error);
