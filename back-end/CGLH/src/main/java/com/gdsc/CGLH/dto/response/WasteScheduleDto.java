@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Getter
@@ -16,7 +17,7 @@ import java.time.LocalDateTime;
 public class WasteScheduleDto {
     private Long id;
     private String centerName;
-    private LocalDateTime requestDate;
+    private LocalDate requestDate;
     private WasteStatus status;
     private String nickname;
 

@@ -3,6 +3,7 @@ package com.gdsc.CGLH.entity;
 import lombok.*;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -25,7 +26,7 @@ public class Waste extends BaseEntity {
     @Enumerated(value = EnumType.STRING)
     private WasteStatus status;
 
-    private LocalDateTime requestDate; // 신청일자
+    private LocalDate requestDate; // 신청일자
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "memberId")

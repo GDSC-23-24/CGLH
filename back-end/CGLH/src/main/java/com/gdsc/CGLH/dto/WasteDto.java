@@ -5,6 +5,7 @@ import com.gdsc.CGLH.entity.Waste;
 import com.gdsc.CGLH.entity.WasteStatus;
 import lombok.*;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -21,7 +22,7 @@ public class WasteDto {
 
     private WasteStatus status; //     읍/면/동
 
-    private LocalDateTime requestDate;
+    private LocalDate requestDate;
 
     private String nickname;
 

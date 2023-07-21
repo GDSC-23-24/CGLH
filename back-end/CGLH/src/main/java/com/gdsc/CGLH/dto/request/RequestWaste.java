@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Data
@@ -19,6 +20,6 @@ public class RequestWaste {
     @NotNull
     private String centerName; //   군/구
     @NotNull
-    @NotBlank
-    private LocalDateTime requestDate;
+//    @NotBlank
+    private LocalDate requestDate;
 }
