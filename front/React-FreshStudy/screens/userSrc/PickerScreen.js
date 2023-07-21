@@ -6,11 +6,7 @@ import { createAxiosObject } from '../toServer/API_BASE';
 
 
 const cities = ["강원도", "경기도", "경상남도", "경상북도", "광주광역시", "대구광역시", "부산광역시", "서울특별시", "세종특별자치시", "울산광역시", "인천광역시", "전라남도", "전라북도", "충청남도", "충청북도"];
-let districts = {
-  '부산광역시': ['중구', '서구', '동구', "강서구"],
-  '서울특별시': ['강남구', '강서구', '서초구'],
-  '대구광역시': ['중구', '동구', '남구']
-};
+let districts = {};
 
 function PickerScreen ({onCityChange, onDistrictChange, selectedCity, selectedDistrict}) {
   // const [selectedCity, setSelectedCity] = useState(null);
@@ -25,16 +21,15 @@ function PickerScreen ({onCityChange, onDistrictChange, selectedCity, selectedDi
     const response = await axiosObject.get('api/v1/locations'); // Replace with the actual center name
     let inArr = response.data
     console.log(inArr)
-    let test = {}
+  
     inArr.forEach((item, _) => {
-      if(test[item.state] === undefined){
-        test[item.state] = [item.name]
+      if(districts[item.state] === undefined){
+        districts[item.state] = [item.name]
       } else{
-        test[item.state].push(item.name)
+        districts[item.state].push(item.name)
        }
     })
-    console.log(test)
-    districts = test;
+    console.log(districts)
   } catch (error) {
     console.log('Error fetching application details:', error);
   }
@@ -64,7 +59,7 @@ function PickerScreen ({onCityChange, onDistrictChange, selectedCity, selectedDi
           onValueChange={(district) => onDistrictChange(district)}
           style={{ color: "white" }}
         >
-          {districts[selectedCity].map((district) => (
+          {districts[selectedCity]?.map((district) => (
             <Picker.Item key={district} label={district} value={district} />
           ))}
         </Picker>

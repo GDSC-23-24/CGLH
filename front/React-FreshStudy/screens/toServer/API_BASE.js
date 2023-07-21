@@ -5,7 +5,7 @@ export const createAxiosObject = () => {
   const { CancelToken } = axios
   const source = CancelToken.source()
   const axiosObject = axios.create({
-      baseURL: "http://192.168.159.1:8080/",
+      baseURL: "http://192.168.0.6:8080/",
       headers: {
           Accept: "application/json",
       },

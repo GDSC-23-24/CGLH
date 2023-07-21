@@ -11,7 +11,7 @@ const createAxiosObject = () => {
   const { CancelToken } = axios;
   const source = CancelToken.source();
   const axiosObject = axios.create({
-    baseURL: 'http://192.168.159.1:8080/',
+    baseURL: 'http://192.168.0.6:8080/',
     headers: {
       Accept: 'application/json',
     },
@@ -44,24 +44,28 @@ const AdminMy = () => {
   }, []);
 
   const fetchSchedule = async () => {
-    try {
-      const axiosObject = createAxiosObject();
-      const response = await axiosObject.get('/api/waste/schedule/강서구 센터',{headers: {Accept: "application/json",Authorization:token},});
-      const scheduleData = response.data;
-      const markedDatesData = {};
-  
-      // Extract requestDate for schedules with status 'PERMIT' and mark them on the calendar
-      scheduleData.forEach((schedule) => {
-        if (schedule.status === 'PERMIT') {
-          const date = schedule.requestDate.split('T')[0]; // Extract the date portion from requestDate
-          markedDatesData[date] = { selected: true }; // Use the ISO 8601 date format (YYYY-MM-DD)
-        }
-      });
-  
-      setMarkedDates(markedDatesData);
-    } catch (error) {
-      console.log('Error fetching schedule:', error);
-    }
+      const axiosObject = createAxiosObject()
+      await axiosObject
+          .get("/api/waste/schedule/수원시 농업기술센터", {headers: {Accept: "application/json",Authorization:token},})
+          .then(response => {
+              console.log("성공")
+              console.log(response.data)
+              const scheduleData = response.data;
+              const markedDatesData = {};
+              // Extract requestDate for schedules with status 'PERMIT' and mark them on the calendar
+              scheduleData.forEach((schedule) => {
+              if (schedule.status === 'PERMIT') {
+                const date = schedule.requestDate.split('T')[0]; // Extract the date portion from requestDate
+                markedDatesData[date] = { selected: true }; // Use the ISO 8601 date format (YYYY-MM-DD)
+              }
+              
+          });
+          setMarkedDates(markedDatesData);
+          })
+          .catch(error => {
+              console.log(error)
+          })
+
   };
   
 

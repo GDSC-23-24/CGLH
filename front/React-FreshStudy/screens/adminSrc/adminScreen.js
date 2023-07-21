@@ -45,6 +45,7 @@ const AdminScreen = () => {
             name="관리자 정보" 
             component={AdminMy}
             options={{
+              unmountOnBlur:true,
               tabBarIcon: ({ focused }) => {
                   return (
                       <View style={{ alignContent: "center", justifyContent: "center" }}>

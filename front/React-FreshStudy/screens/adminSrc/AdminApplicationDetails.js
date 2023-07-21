@@ -11,7 +11,7 @@ const createAxiosObject = () => {
   const source = CancelToken.source();
 
   const axiosObject = axios.create({
-    baseURL: 'http://192.168.159.1:8080/',
+    baseURL: 'http://192.168.0.6:8080/',
     headers: {
       Accept: 'application/json',
     },
@@ -46,7 +46,7 @@ function AdminApplicationDetails() {
   const fetchApplicationDetails = async () => {
     try {
       const axiosObject = createAxiosObject();
-      const response = await axiosObject.get('/api/waste/schedule/나주시 농업기술센터',{headers: {Accept: "application/json",Authorization:token},}); // Replace with the actual center name
+      const response = await axiosObject.get('/api/waste/schedule/수원시 농업기술센터',{headers: {Accept: "application/json",Authorization:token},}); // Replace with the actual center name
       setApplicationData(response.data);
     } catch (error) {
       console.log('Error fetching application details:', error);
